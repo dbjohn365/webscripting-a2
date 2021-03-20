@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dez Boutique</title>
+    <link rel="shortcut icon" href="images/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="jquery/jquery-3.3.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<?php 
+    require_once("config.html");
+    $id = $_POST['id'];
+    $result = $conn->query("SELECT * FROM products WHERE id = ". $id);
+    
+    $products_data = mysqli_fetch_array($result);
+    // die("test".$products_data['sinopsis']);
+    // $check = $conn->query("SELECT user_id FROM queues WHERE user_id = $id AND status='Pending'");
+    
+
+?>
+<div class="container py-2 col-md-5">
+<!-- Default form register -->
+<form class="text-center border border-light p-5" action=<?php echo "doedit.html/id=".$id ?> method="POST"  enctype="multipart/form-data">
+
+    <img src="images/logo.svg" class="rounded mx-auto d-block" style="height: 100px;">
+
+    <p class="h4 mb-4">Edit New Product</p>
+
+    <input type="hidden" name="id" value=<?php echo $id?>>
+    
+    <!-- Product Name -->
+    <input type="text" 
+    name="title" id="defaultRegisterUsername " class="form-control mb-4" 
+    placeholder="Product Name"
+    value=<?php echo $products_data['product_name'] ?>>
+
+
+    <!-- Description -->
+    <input type="text" name="description" id="" class="form-control mb-4"
+        value=<?php echo htmlspecialchars($products_data['description']);  ?>
+    >
+	  <!-- Price -->
+	  
+    <input type="number" name="price" pattern="^\$\d{1,3}(.\d{3})*(\,\d+)?$" id="" class="form-control mb-4"
+        value=<?php echo htmlspecialchars($products_data['description']);  ?>
+    >
+
+    <!-- Image_path -->
+    <input type="file" name="image" id="defaultRegisterUsername " class="form-control mb-4">
+
+    <!-- Sign up button -->
+    <button class="btn btn-secondary my-4 btn-block" type="submit" name="Submit">Edit</button>
+
+
+</form>
+</div>
+    
+</body>
+</html>

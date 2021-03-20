@@ -1,0 +1,13 @@
+<html>
+
+<body>
+<?php
+    require_once("index.php");
+    
+    $id = $_POST['id'];
+    
+    $conn->query("DELETE FROM products WHERE id = ".$id);
+    header("Location: ../index.php");
+    ?>
+	</body>
+</html>
